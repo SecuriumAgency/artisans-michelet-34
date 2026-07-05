@@ -271,6 +271,7 @@ export function ServiceVillePage({
           <ContactForm
             title={`Demandez votre devis à ${ville.nom}`}
             description={`Décrivez votre besoin, un artisan Michelet intervenant à ${ville.nom} vous recontacte sous 24h.`}
+            defaultService={service === "Plombier" ? "Plomberie" : "Serrurerie"}
           />
         </div>
       </section>
