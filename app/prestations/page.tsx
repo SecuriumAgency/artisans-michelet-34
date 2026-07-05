@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PrestationsPage() {
   return (
-    <main className="flex-1 bg-white pt-20">
+    <main className="flex-1 bg-michelet-dark pt-20">
       <Services />
     </main>
   );

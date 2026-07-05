@@ -36,7 +36,7 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${playfairDisplay.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-trust-900">
+      <body className="min-h-full flex flex-col bg-michelet-dark text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

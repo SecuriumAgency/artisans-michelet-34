@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Droplets, KeyRound, ShieldCheck, Wrench } from "lucide-react";
 import { TiltCard } from "@/components/ui/TiltCard";
 
@@ -30,33 +33,46 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section aria-label="Nos prestations" className="bg-white px-6 py-section">
+    <section aria-label="Nos prestations" className="bg-michelet-dark px-6 py-section">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mx-auto max-w-2xl text-center"
+        >
           <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
             Nos prestations
           </span>
-          <h2 className="mt-3 font-display text-3xl font-bold text-trust-900 sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
             Un savoir-faire artisanal à votre service
           </h2>
-        </div>
+        </motion.div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map(({ icon: Icon, title, description }) => (
-            <TiltCard
+          {SERVICES.map(({ icon: Icon, title, description }, index) => (
+            <motion.div
               key={title}
-              intensity={8}
-              className="group relative overflow-hidden rounded-2xl border border-trust-100 bg-gradient-to-b from-white to-trust-50 p-8 shadow-floating transition-shadow duration-300 hover:shadow-glow-blue"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
             >
-              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative z-10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-michelet-dark text-michelet-blue">
-                  <Icon className="h-6 w-6" />
+              <TiltCard
+                intensity={8}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-colors duration-300 hover:border-blue-500/50"
+              >
+                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative z-10">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-michelet-blue/10 text-michelet-blue">
+                    <Icon className="h-6 w-6" aria-hidden />
+                  </div>
+                  <h3 className="mt-6 font-display text-xl font-bold text-white">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-400">{description}</p>
                 </div>
-                <h3 className="mt-6 font-display text-xl font-bold text-trust-900">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-trust-500">{description}</p>
-              </div>
-            </TiltCard>
+              </TiltCard>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -10,7 +10,7 @@ const NAV_LINKS = [
 ];
 
 const LINK_CLASSES =
-  "inline-block text-sm text-gray-400 transition-transform duration-200 hover:translate-x-1 hover:text-blue-400";
+  "inline-block text-sm text-gray-400 transition-all duration-300 hover:translate-x-1 hover:text-michelet-blue";
 
 export function Footer() {
   return (

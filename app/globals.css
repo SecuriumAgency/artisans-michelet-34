@@ -2,7 +2,7 @@
 @config "../tailwind.config.ts";
 
 body {
-  @apply bg-white text-trust-900;
+  @apply bg-michelet-dark text-white;
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
