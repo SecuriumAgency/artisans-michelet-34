@@ -11,6 +11,8 @@ import {
 } from "framer-motion";
 
 const INTENSITY = 25;
+const LOGO_WIDTH = 411;
+const LOGO_HEIGHT = 133;
 
 export function CenterLogo3D() {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,17 +52,18 @@ export function CenterLogo3D() {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className="relative mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64"
+      style={{ rotateX, rotateY, transformPerspective: 1200 }}
+      className="relative mx-auto w-72 md:w-[28rem] lg:w-[36rem]"
     >
-      <div className="relative h-full w-full [filter:drop-shadow(0_0_40px_rgba(0,102,255,0.3))_invert(1)_brightness(2)] transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_60px_rgba(0,102,255,0.5))_invert(1)_brightness(2.1)]">
+      <div className="[filter:drop-shadow(0_0_40px_rgba(0,102,255,0.3))_invert(1)_brightness(2)] transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_60px_rgba(0,102,255,0.5))_invert(1)_brightness(2.1)]">
         <Image
           src="/logo-michelet.png"
           alt="Artisans Michelet"
-          fill
+          width={LOGO_WIDTH}
+          height={LOGO_HEIGHT}
           preload
-          sizes="256px"
-          className="object-contain"
+          sizes="(min-width: 1024px) 36rem, (min-width: 768px) 28rem, 18rem"
+          className="h-auto w-full object-contain"
         />
       </div>
       <motion.div

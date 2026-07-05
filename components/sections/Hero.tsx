@@ -8,7 +8,7 @@ import { CenterLogo3D } from "@/components/ui/CenterLogo3D";
 import { TrustBar } from "@/components/ui/TrustBar";
 
 const HERO_IMAGE_URL =
-  "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80";
+  "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2070";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,16 +35,10 @@ export function Hero() {
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/80 via-michelet-dark/60 to-michelet-dark/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050B14_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.4)_0%,rgba(5,11,20,0.95)_100%)]" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-6 text-center">
-        <span className="inline-block rounded-full border border-michelet-blue/40 bg-michelet-blue/10 px-4 py-1.5 text-sm font-semibold tracking-widest text-white">
-          ARTISANS MICHELET — HÉRAULT (34)
-        </span>
-
-        <div className="mt-10">
-          <CenterLogo3D />
-        </div>
+        <CenterLogo3D />
 
         <p className="mt-10 max-w-xl font-sans text-lg text-gray-300 sm:text-xl">
           Plomberie et serrurerie d&apos;exception dans tout le département de l&apos;Hérault.
