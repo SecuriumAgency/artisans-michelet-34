@@ -43,6 +43,11 @@ const config: Config = {
         display: ["var(--font-display)", "sans-serif"],
         sans: ["var(--font-sans)", "sans-serif"],
       },
+      boxShadow: {
+        floating:
+          "0 20px 40px -12px rgba(10,22,38,0.45), 0 8px 16px -8px rgba(10,22,38,0.35)",
+        "glow-gold": "0 0 25px rgba(184,134,42,0.55), 0 0 50px rgba(184,134,42,0.25)",
+      },
     },
   },
   plugins: [],
