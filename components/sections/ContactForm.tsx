@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { LoaderCircle } from "lucide-react";
+import { CheckCircle, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
@@ -81,8 +81,12 @@ export function ContactForm({
 
       <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-[0_8px_32px_rgba(0,102,255,0.15)] backdrop-blur-xl">
         {status === "success" ? (
-          <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-8 text-center text-blue-100">
-            Merci, votre demande a bien été envoyée. Nous vous recontactons rapidement.
+          <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-8 text-center backdrop-blur-md">
+            <CheckCircle className="mx-auto h-10 w-10 text-green-400" aria-hidden />
+            <p className="mt-4 font-semibold text-white">
+              Merci, votre demande a bien été envoyée.
+            </p>
+            <p className="mt-1 text-sm text-green-200">Nous vous recontactons rapidement.</p>
           </div>
         ) : (
           <form className="space-y-6" onSubmit={handleSubmit}>
