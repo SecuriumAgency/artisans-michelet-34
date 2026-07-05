@@ -33,7 +33,7 @@ export function Services() {
     <section aria-label="Nos prestations" className="bg-white px-6 py-section">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-widest text-action-500">
+          <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
             Nos prestations
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-trust-900 sm:text-4xl">
@@ -46,11 +46,11 @@ export function Services() {
             <TiltCard
               key={title}
               intensity={8}
-              className="group relative overflow-hidden rounded-2xl border border-trust-100 bg-gradient-to-b from-white to-trust-50 p-8 shadow-floating transition-shadow duration-300 hover:shadow-glow-gold"
+              className="group relative overflow-hidden rounded-2xl border border-trust-100 bg-gradient-to-b from-white to-trust-50 p-8 shadow-floating transition-shadow duration-300 hover:shadow-glow-blue"
             >
               <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative z-10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-trust-900 text-action-300">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-michelet-dark text-michelet-blue">
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-6 font-display text-xl font-bold text-trust-900">{title}</h3>

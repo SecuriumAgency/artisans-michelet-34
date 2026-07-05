@@ -30,6 +30,8 @@ const config: Config = {
           800: "#4d3714",
           900: "#2e210d",
         },
+        "michelet-blue": "#0066FF",
+        "michelet-dark": "#050B14",
       },
       spacing: {
         18: "4.5rem",
@@ -47,6 +49,8 @@ const config: Config = {
         floating:
           "0 20px 40px -12px rgba(10,22,38,0.45), 0 8px 16px -8px rgba(10,22,38,0.35)",
         "glow-gold": "0 0 25px rgba(184,134,42,0.55), 0 0 50px rgba(184,134,42,0.25)",
+        "glow-blue": "0 0 30px rgba(0,102,255,0.4)",
+        "glow-blue-lg": "0 0 45px rgba(0,102,255,0.6)",
       },
     },
   },

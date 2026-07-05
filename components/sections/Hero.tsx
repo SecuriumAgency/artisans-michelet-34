@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { TiltCard } from "@/components/ui/TiltCard";
@@ -11,21 +10,47 @@ import { TrustBar } from "@/components/ui/TrustBar";
 const HERO_IMAGE_URL =
   "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80";
 
+function RevealText3D({
+  text,
+  baseDelay = 0,
+}: {
+  text: string;
+  baseDelay?: number;
+}) {
+  return (
+    <span className="inline-block [perspective:800px]">
+      {text.split("").map((char, index) => (
+        <span
+          key={index}
+          className="reveal-letter-3d inline-block"
+          style={{ animationDelay: `${baseDelay + index * 0.012}s` }}
+        >
+          {char === " " ? " " : char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+const LINE_1 = "Plomberie et Serrurerie";
+const LINE_2 = "dans l'Hérault (34)";
+const LINE_2_DELAY = 0.1 + LINE_1.length * 0.012 + 0.05;
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
 
   return (
     <section
       ref={sectionRef}
       aria-label="Services d'artisanat dans l'Hérault"
-      className="relative flex min-h-screen items-center overflow-hidden bg-trust-900"
+      className="relative flex min-h-screen items-center overflow-hidden bg-michelet-dark"
     >
-      <motion.div style={{ y }} className="absolute inset-0 -top-1/4 h-[125%]">
+      <motion.div style={{ y }} className="absolute inset-0 -top-1/4 h-[135%]">
         <Image
           src={HERO_IMAGE_URL}
           alt="Réalisation artisanale Michelet"
@@ -35,24 +60,20 @@ export function Hero() {
           className="object-cover"
         />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-trust-900/85 via-trust-900/60 to-trust-900/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/90 via-michelet-dark/70 to-michelet-dark/95" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
         <TiltCard intensity={5} className="mx-auto rounded-3xl px-6 py-section text-center text-white sm:px-12">
-          <span className="inline-block rounded-full border border-action-400/50 bg-action-900/40 px-4 py-1.5 text-sm font-semibold tracking-widest text-action-200">
+          <span className="inline-block rounded-full border border-michelet-blue/40 bg-michelet-blue/10 px-4 py-1.5 text-sm font-semibold tracking-widest text-white">
             ARTISANS MICHELET — HÉRAULT (34)
           </span>
 
           <h1 className="mt-8 font-display text-4xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-            <span className="block overflow-hidden pb-1">
-              <span className="reveal-line block" style={{ animationDelay: "0.1s" }}>
-                Plomberie et Serrurerie
-              </span>
+            <span className="block">
+              <RevealText3D text={LINE_1} baseDelay={0.1} />
             </span>
-            <span className="block overflow-hidden pb-1">
-              <span className="reveal-line block" style={{ animationDelay: "0.25s" }}>
-                dans l&apos;Hérault (34)
-              </span>
+            <span className="block">
+              <RevealText3D text={LINE_2} baseDelay={LINE_2_DELAY} />
             </span>
           </h1>
 
@@ -68,16 +89,13 @@ export function Hero() {
             className="reveal-line mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
             style={{ animationDelay: "0.55s" }}
           >
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-trust-700 px-8 py-3 font-semibold tracking-wide text-white shadow-[0_0_30px_rgba(197,160,89,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-trust-600 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] active:translate-y-0 active:scale-95"
-            >
+            <Button href="/contact" variant="primary">
               Demander un devis
-            </Link>
+            </Button>
             <Button
               href="tel:0411939674"
               variant="outline"
-              className="border-action-400 text-action-300 hover:border-action-300 hover:text-action-200"
+              className="border-white/30 text-white hover:border-michelet-blue hover:text-michelet-blue"
             >
               Appeler l&apos;expert 04 11 93 96 74
             </Button>
