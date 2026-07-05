@@ -16,7 +16,7 @@ const playfairDisplay = Playfair_Display({
 
 const TITLE = "Artisans Michelet | Artisanat d'exception dans l'Hérault";
 const DESCRIPTION =
-  "Artisans Michelet, savoir-faire artisanal haut de gamme dans le département 34 (Hérault).";
+  "Artisans Michelet, savoir-faire artisanal haut de gamme dans le département 34 (Hérault). Service d'urgence disponible 24h/24, 7j/7.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -44,16 +44,30 @@ export default function RootLayout({
               description: DESCRIPTION,
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "ADRESSE_A_COMPLETER",
-                addressLocality: "VILLE_A_COMPLETER",
-                postalCode: "CODE_POSTAL_A_COMPLETER",
+                streetAddress: "1 Rue de la République",
+                addressLocality: "Montpellier",
+                postalCode: "34000",
                 addressRegion: "Occitanie",
                 addressCountry: "FR",
               },
-              telephone: "TELEPHONE_A_COMPLETER",
+              telephone: "04 11 93 96 74",
               areaServed: {
                 "@type": "AdministrativeArea",
                 name: "Hérault (34)",
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday",
+                ],
+                opens: "00:00",
+                closes: "23:59",
               },
               priceRange: "€€€",
             }),

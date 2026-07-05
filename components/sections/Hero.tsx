@@ -13,9 +13,9 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-60"
+        className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-trust-950 via-trust-950/60 to-trust-950/20" />
+      <div className="absolute inset-0 bg-trust-950/60" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 py-section text-center text-white">
         <span className="inline-block rounded-full border border-action-400/50 bg-action-900/40 px-4 py-1.5 text-sm font-semibold tracking-widest text-action-200">
