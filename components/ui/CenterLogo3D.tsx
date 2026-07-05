@@ -10,7 +10,7 @@ import {
   useTransform,
 } from "framer-motion";
 
-const INTENSITY = 25;
+const INTENSITY = 10;
 const LOGO_WIDTH = 411;
 const LOGO_HEIGHT = 133;
 
@@ -53,16 +53,16 @@ export function CenterLogo3D() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformPerspective: 1200 }}
-      className="relative mx-auto w-72 md:w-[28rem] lg:w-[36rem]"
+      className="relative mx-auto w-56 md:w-72 lg:w-80"
     >
-      <div className="[filter:drop-shadow(0_0_40px_rgba(0,102,255,0.3))_invert(1)_brightness(2)] transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_60px_rgba(0,102,255,0.5))_invert(1)_brightness(2.1)]">
+      <div className="[filter:brightness(1.2)_contrast(1.1)_drop-shadow(0_10px_15px_rgba(0,0,0,0.8))] transition-[filter] duration-300 hover:[filter:brightness(1.3)_contrast(1.15)_drop-shadow(0_12px_20px_rgba(0,0,0,0.85))]">
         <Image
           src="/logo-michelet.png"
           alt="Artisans Michelet"
           width={LOGO_WIDTH}
           height={LOGO_HEIGHT}
           preload
-          sizes="(min-width: 1024px) 36rem, (min-width: 768px) 28rem, 18rem"
+          sizes="(min-width: 1024px) 20rem, (min-width: 768px) 18rem, 14rem"
           className="h-auto w-full object-contain"
         />
       </div>

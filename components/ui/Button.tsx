@@ -6,13 +6,13 @@ type Variant = "primary" | "outline";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary:
-    "bg-gradient-to-b from-[#0066FF] to-blue-800 text-white shadow-[inset_0_2px_1px_rgba(255,255,255,0.25),inset_0_-3px_6px_rgba(0,0,0,0.35),0_0_40px_rgba(0,102,255,0.5)] hover:shadow-[inset_0_2px_1px_rgba(255,255,255,0.3),inset_0_-3px_6px_rgba(0,0,0,0.4),0_0_55px_rgba(0,102,255,0.65)] hover:brightness-110",
+    "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-blue-400/20 hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]",
   outline:
-    "border border-trust-300 text-trust-700 bg-transparent hover:border-trust-500 hover:text-trust-900",
+    "bg-transparent border border-white/30 text-white hover:bg-white/5 backdrop-blur-sm",
 };
 
 const BASE_CLASSES =
-  "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-semibold tracking-wide transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95";
+  "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95";
 
 type ButtonProps = {
   variant?: Variant;

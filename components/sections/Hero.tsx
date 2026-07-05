@@ -37,22 +37,18 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/80 via-michelet-dark/60 to-michelet-dark/95" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.4)_0%,rgba(5,11,20,0.95)_100%)]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-6 text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-10 px-6 text-center">
         <CenterLogo3D />
 
-        <p className="mt-10 max-w-xl font-sans text-lg text-gray-300 sm:text-xl">
+        <p className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
           Plomberie et serrurerie d&apos;exception dans tout le département de l&apos;Hérault.
         </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/contact" variant="primary">
             Demander un devis
           </Button>
-          <Button
-            href="tel:0411939674"
-            variant="outline"
-            className="border-white/30 text-white hover:border-michelet-blue hover:text-michelet-blue"
-          >
+          <Button href="tel:0411939674" variant="outline">
             Appeler l&apos;expert 04 11 93 96 74
           </Button>
         </div>
