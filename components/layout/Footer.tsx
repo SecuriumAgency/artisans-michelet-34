@@ -1,23 +1,6 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
-
-const VILLES_PLOMBERIE = [
-  "Montpellier",
-  "Béziers",
-  "Sète",
-  "Lunel",
-  "Mauguio",
-  "Pézenas",
-];
-
-const VILLES_SERRURERIE = [
-  "Montpellier",
-  "Agde",
-  "Gignac",
-  "Clermont-l'Hérault",
-  "Lodève",
-  "Frontignan",
-];
+import { VILLES_PLOMBERIE, VILLES_SERRURERIE } from "@/lib/villes";
 
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
@@ -54,9 +37,9 @@ export function Footer() {
             </p>
             <ul className="mt-5 space-y-3">
               {VILLES_PLOMBERIE.map((ville) => (
-                <li key={ville}>
-                  <Link href="/prestations" className={LINK_CLASSES}>
-                    Plombier {ville}
+                <li key={ville.slug}>
+                  <Link href={`/plombier/${ville.slug}`} className={LINK_CLASSES}>
+                    Plombier {ville.nom}
                   </Link>
                 </li>
               ))}
@@ -69,9 +52,9 @@ export function Footer() {
             </p>
             <ul className="mt-5 space-y-3">
               {VILLES_SERRURERIE.map((ville) => (
-                <li key={ville}>
-                  <Link href="/prestations" className={LINK_CLASSES}>
-                    Serrurier {ville}
+                <li key={ville.slug}>
+                  <Link href={`/serrurier/${ville.slug}`} className={LINK_CLASSES}>
+                    Serrurier {ville.nom}
                   </Link>
                 </li>
               ))}
