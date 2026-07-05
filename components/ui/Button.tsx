@@ -5,13 +5,14 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "outline";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "bg-michelet-blue text-white hover:bg-[#0052d4]",
+  primary:
+    "bg-gradient-to-b from-[#0066FF] to-blue-800 text-white shadow-[inset_0_2px_1px_rgba(255,255,255,0.25),inset_0_-3px_6px_rgba(0,0,0,0.35),0_0_40px_rgba(0,102,255,0.5)] hover:shadow-[inset_0_2px_1px_rgba(255,255,255,0.3),inset_0_-3px_6px_rgba(0,0,0,0.4),0_0_55px_rgba(0,102,255,0.65)] hover:brightness-110",
   outline:
     "border border-trust-300 text-trust-700 bg-transparent hover:border-trust-500 hover:text-trust-900",
 };
 
 const BASE_CLASSES =
-  "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-semibold tracking-wide shadow-glow-blue transition-all duration-300 hover:-translate-y-1 hover:shadow-glow-blue-lg active:translate-y-0 active:scale-95";
+  "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-semibold tracking-wide transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95";
 
 type ButtonProps = {
   variant?: Variant;

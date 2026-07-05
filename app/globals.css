@@ -11,34 +11,3 @@ h2,
 h3 {
   font-family: var(--font-display), serif;
 }
-
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reveal-line {
-  animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes reveal-letter-3d {
-  from {
-    opacity: 0;
-    transform: rotateX(90deg) translateY(20%);
-  }
-  to {
-    opacity: 1;
-    transform: rotateX(0deg) translateY(0);
-  }
-}
-
-.reveal-letter-3d {
-  animation: reveal-letter-3d 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  transform-origin: bottom;
-}
