@@ -55,7 +55,7 @@ export function CenterLogo3D() {
       style={{ rotateX, rotateY, transformPerspective: 1200 }}
       className="relative mx-auto w-56 md:w-72 lg:w-80"
     >
-      <div className="[filter:brightness(1.2)_contrast(1.1)_drop-shadow(0_10px_15px_rgba(0,0,0,0.8))] transition-[filter] duration-300 hover:[filter:brightness(1.3)_contrast(1.15)_drop-shadow(0_12px_20px_rgba(0,0,0,0.85))]">
+      <div className="[filter:invert(1)_hue-rotate(180deg)_brightness(1.1)_contrast(1.05)_drop-shadow(0_10px_20px_rgba(0,102,255,0.25))] transition-[filter] duration-300 hover:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(1.1)_drop-shadow(0_12px_28px_rgba(0,102,255,0.4))]">
         <Image
           src="/logo-michelet.png"
           alt="Artisans Michelet"
