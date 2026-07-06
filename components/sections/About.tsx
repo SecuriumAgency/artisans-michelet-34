@@ -90,7 +90,7 @@ export function About() {
           <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
             À propos
           </span>
-          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             L&apos;exigence artisanale, depuis toujours
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-gray-300">

@@ -34,7 +34,7 @@ export function ContactForm({
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const Heading = as;
-  const headingSize = as === "h1" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl";
+  const headingSize = as === "h1" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl lg:text-5xl";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -79,9 +79,9 @@ export function ContactForm({
       <Heading className={`font-display font-bold text-white ${headingSize}`}>{title}</Heading>
       <p className="mt-4 text-gray-300">{description}</p>
 
-      <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-[0_8px_32px_rgba(0,102,255,0.15)] backdrop-blur-xl">
+      <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_8px_32px_rgba(0,102,255,0.15)] backdrop-blur-xl md:p-8">
         {status === "success" ? (
-          <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-8 text-center backdrop-blur-md">
+          <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-center backdrop-blur-md md:p-8">
             <CheckCircle className="mx-auto h-10 w-10 text-green-400" aria-hidden />
             <p className="mt-4 font-semibold text-white">
               Merci, votre demande a bien été envoyée.

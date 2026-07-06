@@ -52,7 +52,7 @@ export function Testimonials() {
           <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
             Témoignages
           </span>
-          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             La confiance de nos clients
           </h2>
         </motion.div>

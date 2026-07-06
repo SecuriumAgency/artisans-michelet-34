@@ -22,7 +22,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       aria-label="Artisans Michelet — Plomberie et Serrurerie dans l'Hérault"
-      className="relative flex min-h-screen items-center overflow-hidden bg-michelet-dark"
+      className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-michelet-dark px-6 py-28"
     >
       <motion.div style={{ y }} className="absolute inset-0 -top-1/3 h-[170%]">
         <Image
@@ -37,7 +37,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/80 via-michelet-dark/60 to-michelet-dark/95" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.4)_0%,rgba(5,11,20,0.95)_100%)]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-10 px-6 text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-10 text-center">
         <CenterLogo3D />
 
         <p className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
@@ -54,7 +54,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center px-6">
+      <div className="relative z-10 mt-16 flex w-full justify-center">
         <TrustBar />
       </div>
     </section>

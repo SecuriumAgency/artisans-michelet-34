@@ -21,7 +21,7 @@ export function AProposContent() {
         <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
           À propos
         </span>
-        <h1 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">
+        <h1 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
           L&apos;exigence artisanale, depuis toujours
         </h1>
         <div className="mt-8 space-y-6 text-lg leading-relaxed text-gray-300">
@@ -43,7 +43,7 @@ export function AProposContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-        className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-[0_8px_32px_rgba(0,102,255,0.15)] backdrop-blur-xl"
+        className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_8px_32px_rgba(0,102,255,0.15)] backdrop-blur-xl md:p-8"
       >
         <ul className="grid gap-4 sm:grid-cols-2">
           {HIGHLIGHTS.map((item) => (

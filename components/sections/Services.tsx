@@ -45,7 +45,7 @@ export function Services() {
           <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
             Nos prestations
           </span>
-          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Un savoir-faire artisanal à votre service
           </h2>
         </motion.div>
@@ -61,7 +61,7 @@ export function Services() {
             >
               <TiltCard
                 intensity={8}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-colors duration-300 hover:border-blue-500/50"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition-colors duration-300 hover:border-blue-500/50 md:p-8"
               >
                 <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative z-10">

@@ -61,7 +61,7 @@ function VilleHero({
     <section
       ref={sectionRef}
       aria-label={`${service} à ${ville.nom} — Artisans Michelet`}
-      className="relative flex min-h-[90vh] items-center overflow-hidden bg-michelet-dark"
+      className="relative flex min-h-[90dvh] w-full flex-col items-center justify-center overflow-hidden bg-michelet-dark px-6 py-20"
     >
       <motion.div style={{ y }} className="absolute inset-0 -top-1/3 h-[170%]">
         <Image
@@ -76,7 +76,7 @@ function VilleHero({
       <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/80 via-michelet-dark/60 to-michelet-dark/95" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.4)_0%,rgba(5,11,20,0.95)_100%)]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 px-6 pt-20 text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 text-center">
         <CenterLogo3D />
 
         <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
@@ -88,7 +88,7 @@ function VilleHero({
           animate="show"
           variants={REVEAL_CONTAINER}
           style={{ perspective: 800 }}
-          className="flex flex-wrap justify-center gap-x-3 font-display text-4xl font-bold text-white sm:text-5xl"
+          className="flex flex-wrap justify-center gap-x-3 font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
         >
           {words.map((word, index) => (
             <motion.span
@@ -112,7 +112,7 @@ function VilleHero({
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center px-6">
+      <div className="relative z-10 mt-16 flex w-full justify-center">
         <TrustBar />
       </div>
     </section>
@@ -143,7 +143,7 @@ function ContentColumn({
         >
           <TiltCard
             intensity={4}
-            className="group mb-12 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+            className="group mb-12 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl md:p-8"
           >
             <div className="relative mb-6 h-64 overflow-hidden rounded-2xl sm:h-80">
               <Image
@@ -156,7 +156,7 @@ function ContentColumn({
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             </div>
 
-            <h2 className="font-display text-2xl font-bold text-blue-400 sm:text-3xl">
+            <h2 className="font-display text-2xl font-bold text-blue-400 sm:text-3xl lg:text-4xl">
               {section.title}
             </h2>
             {section.paragraphs.map((paragraph, paragraphIndex) => (
@@ -192,7 +192,7 @@ function Sidebar({
   return (
     <aside className="lg:col-span-4">
       <div className="sticky top-24 space-y-8">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-900 p-8 shadow-glow-blue">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-900 p-4 shadow-glow-blue md:p-8">
           <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent" />
           <div className="relative z-10">
             <h3 className="font-display text-xl font-bold text-white">
