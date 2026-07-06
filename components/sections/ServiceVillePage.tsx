@@ -1,31 +1,23 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { CheckCircle, Phone } from "lucide-react";
+import { CheckCircle, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { TrustBar } from "@/components/ui/TrustBar";
 import { CenterLogo3D } from "@/components/ui/CenterLogo3D";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { getPlomberieContent, getSerrurerieContent } from "@/lib/data/seo-content";
 import type { Ville } from "@/lib/villes";
 
-export type ServiceCard = {
-  icon: ReactNode;
-  title: string;
-  description: string;
-};
-
 type ServiceVillePageProps = {
-  service: string;
+  service: "Plombier" | "Serrurier";
   ville: Ville;
   basePath: string;
   heroImageUrl: string;
-  description: string;
-  highlights: string[];
-  cards: ServiceCard[];
   siblingVilles: Ville[];
   crossService?: { label: string; href: string };
 };
@@ -126,60 +118,145 @@ function VilleHero({
   );
 }
 
-function ServiceCards({
+function ContentColumn({
   service,
   ville,
-  cards,
+}: {
+  service: "Plombier" | "Serrurier";
+  ville: Ville;
+}) {
+  const sections =
+    service === "Plombier"
+      ? getPlomberieContent(ville.nom, ville.codePostal)
+      : getSerrurerieContent(ville.nom, ville.codePostal);
+
+  return (
+    <div className="lg:col-span-8">
+      {sections.map((section, index) => (
+        <motion.div
+          key={section.title}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.05 }}
+        >
+          <TiltCard
+            intensity={4}
+            className="group mb-12 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+          >
+            <div className="relative mb-6 h-64 overflow-hidden rounded-2xl sm:h-80">
+              <Image
+                src={section.imageUrl}
+                alt={section.title}
+                fill
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            </div>
+
+            <h2 className="font-display text-2xl font-bold text-blue-400 sm:text-3xl">
+              {section.title}
+            </h2>
+            {section.paragraphs.map((paragraph, paragraphIndex) => (
+              <p
+                key={paragraphIndex}
+                className="mt-4 leading-relaxed text-gray-300"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </TiltCard>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function Sidebar({
+  service,
+  ville,
+  basePath,
+  siblingVilles,
+  crossService,
 }: {
   service: string;
   ville: Ville;
-  cards: ServiceCard[];
+  basePath: string;
+  siblingVilles: Ville[];
+  crossService?: { label: string; href: string };
 }) {
-  return (
-    <section aria-label={`Prestations ${service} à ${ville.nom}`} className="px-6 py-section">
-      <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
-            Nos prestations
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
-            {service} à {ville.nom}
-          </h2>
-        </motion.div>
+  const mapQuery = encodeURIComponent(`${ville.nom}, Hérault, France`);
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-3">
-          {cards.map(({ icon, title, description }, index) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+  return (
+    <aside className="lg:col-span-4">
+      <div className="sticky top-24 space-y-8">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-900 p-8 shadow-glow-blue">
+          <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent" />
+          <div className="relative z-10">
+            <h3 className="font-display text-xl font-bold text-white">
+              Besoin d&apos;un artisan à {ville.nom} ?
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-blue-100">
+              Intervention {service.toLowerCase()} rapide, 7j/7. Devis transparent, sans
+              surprise.
+            </p>
+            <Link
+              href="tel:0411939674"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-blue-900 shadow-[0_10px_25px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.45)] active:translate-y-0"
             >
-              <TiltCard
-                intensity={8}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-colors duration-300 hover:border-blue-500/50"
-              >
-                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative z-10">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-michelet-blue/10 text-michelet-blue">
-                    {icon}
-                  </div>
-                  <h3 className="mt-6 font-display text-xl font-bold text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-400">{description}</p>
-                </div>
-              </TiltCard>
-            </motion.div>
-          ))}
+              <Phone className="h-4 w-4" aria-hidden />
+              04 11 93 96 74
+            </Link>
+            {crossService && (
+              <p className="mt-4 text-center text-xs text-blue-100">
+                Besoin d&apos;un autre service ?{" "}
+                <Link href={crossService.href} className="font-semibold text-white underline">
+                  {crossService.label}
+                </Link>
+              </p>
+            )}
+          </div>
         </div>
+
+        <div className="overflow-hidden rounded-2xl border border-white/10">
+          <iframe
+            title={`Carte ${ville.nom}`}
+            src={`https://maps.google.com/maps?q=${mapQuery}&z=13&output=embed`}
+            width="100%"
+            height="280"
+            loading="lazy"
+            style={{
+              filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(120%)",
+              borderRadius: "1rem",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+          />
+        </div>
+
+        {siblingVilles.length > 0 && (
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
+              <MapPin className="h-3.5 w-3.5" aria-hidden />
+              Nous intervenons à
+            </p>
+            <ul className="mt-4 space-y-1">
+              {siblingVilles.map((sibling) => (
+                <li key={sibling.slug}>
+                  <Link
+                    href={`${basePath}/${sibling.slug}`}
+                    className="group flex items-center gap-2 rounded-lg px-2 py-2 text-sm text-gray-400 transition-all duration-300 hover:translate-x-2 hover:text-[#0066FF]"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-gray-600 transition-all duration-300 group-hover:bg-[#0066FF] group-hover:shadow-glow-blue" />
+                    {service} {sibling.nom}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-    </section>
+    </aside>
   );
 }
 
@@ -188,83 +265,52 @@ export function ServiceVillePage({
   ville,
   basePath,
   heroImageUrl,
-  description,
-  highlights,
-  cards,
   siblingVilles,
   crossService,
 }: ServiceVillePageProps) {
+  const highlights = [
+    "Intervention rapide, 7j/7",
+    "Artisans qualifiés et assurés",
+    "Garantie décennale sur nos réalisations",
+    "Devis transparent, sans surprise",
+  ];
+
   return (
-    <main className="flex-1 bg-gradient-to-b from-michelet-dark to-[#08101E]">
+    <main className="flex-1 bg-gradient-to-b from-[#050B14] to-[#0A1626]">
       <VilleHero service={service} ville={ville} heroImageUrl={heroImageUrl} />
 
-      <section className="mx-auto max-w-4xl px-6 py-section">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <p className="max-w-2xl text-lg leading-relaxed text-gray-300">{description}</p>
-
-          <ul className="mt-8 space-y-4">
+      <section className="px-6 py-section">
+        <div className="mx-auto max-w-6xl">
+          <motion.ul
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-12 flex flex-wrap gap-x-8 gap-y-4"
+          >
             {highlights.map((item) => (
               <li key={item} className="flex items-center gap-3">
                 <CheckCircle
                   className="h-5 w-5 shrink-0 text-michelet-blue drop-shadow-[0_0_8px_rgba(0,102,255,0.6)]"
                   aria-hidden
                 />
-                <span className="text-gray-200">{item}</span>
+                <span className="text-sm text-gray-200">{item}</span>
               </li>
             ))}
-          </ul>
-        </motion.div>
+          </motion.ul>
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <ContentColumn service={service} ville={ville} />
+            <Sidebar
+              service={service}
+              ville={ville}
+              basePath={basePath}
+              siblingVilles={siblingVilles}
+              crossService={crossService}
+            />
+          </div>
+        </div>
       </section>
-
-      <ServiceCards service={service} ville={ville} cards={cards} />
-
-      {(siblingVilles.length > 0 || crossService) && (
-        <section className="mx-auto max-w-4xl px-6 pb-section">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="border-t border-white/10 pt-10"
-          >
-            {crossService && (
-              <p className="text-sm text-gray-400">
-                Besoin d&apos;un autre service à {ville.nom} ?{" "}
-                <Link
-                  href={crossService.href}
-                  className="font-semibold text-michelet-blue transition-colors hover:text-blue-400"
-                >
-                  {crossService.label}
-                </Link>
-              </p>
-            )}
-
-            {siblingVilles.length > 0 && (
-              <>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-gray-500">
-                  {service} — autres villes du secteur
-                </p>
-                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-                  {siblingVilles.map((sibling) => (
-                    <Link
-                      key={sibling.slug}
-                      href={`${basePath}/${sibling.slug}`}
-                      className="text-sm text-gray-400 transition-transform duration-200 hover:translate-x-1 hover:text-blue-400"
-                    >
-                      {service} {sibling.nom}
-                    </Link>
-                  ))}
-                </div>
-              </>
-            )}
-          </motion.div>
-        </section>
-      )}
 
       <section className="border-t border-white/10 bg-[#03060C] px-6 py-section">
         <div className="mx-auto max-w-2xl">
