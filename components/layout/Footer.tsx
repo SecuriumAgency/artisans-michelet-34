@@ -81,6 +81,21 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Artisans Michelet. Tous droits réservés.</p>
           <p>SIRET [à compléter] — Assurance décennale [à compléter]</p>
         </div>
+
+        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500">
+          <Link
+            href="/mentions-legales"
+            className="text-xs text-gray-500 transition-colors duration-300 hover:text-blue-400"
+          >
+            Mentions légales
+          </Link>
+          <Link
+            href="/politique-confidentialite"
+            className="text-xs text-gray-500 transition-colors duration-300 hover:text-blue-400"
+          >
+            Politique de confidentialité
+          </Link>
+        </div>
       </div>
     </footer>
   );
