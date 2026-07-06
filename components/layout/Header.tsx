@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
@@ -24,16 +26,48 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    function handleKeydown(event: KeyboardEvent) {
+      if (event.key === "Escape") setMobileOpen(false);
+    }
+    function handleResize() {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeydown);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeydown);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [mobileOpen]);
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
-        scrolled
+        scrolled || mobileOpen
           ? "border-white/10 bg-michelet-dark/50 backdrop-blur-2xl"
           : "border-transparent bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-end gap-8 px-6">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:justify-end md:gap-8">
+        <button
+          type="button"
+          onClick={() => setMobileOpen((open) => !open)}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+          aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-michelet-blue/50 md:hidden"
+        >
+          {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+        </button>
+
         <nav className="hidden items-center gap-8 md:mr-auto md:flex">
           {NAV_LINKS.map((link) => (
             <Link
@@ -54,6 +88,34 @@ export function Header() {
           04 11 93 96 74
         </Link>
       </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            id="mobile-nav"
+            aria-label="Navigation principale"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="border-t border-white/10 bg-michelet-dark/95 px-6 py-6 backdrop-blur-2xl md:hidden"
+          >
+            <ul className="flex flex-col gap-2">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-xl px-4 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-michelet-blue"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
