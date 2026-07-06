@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local tooling script, not part of the Next.js app:
+    "securium-pilot.js",
   ]),
 ]);
 

@@ -68,6 +68,7 @@ function VilleHero({
           src={heroImageUrl}
           alt={`Intervention Artisans Michelet à ${ville.nom}`}
           fill
+          preload
           sizes="100vw"
           className="object-cover"
         />
