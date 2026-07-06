@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const ABOUT_IMAGE_URL =
@@ -47,7 +47,7 @@ export function About() {
             <p className="text-xs uppercase tracking-widest text-gray-300">D&apos;expérience</p>
           </div>
 
-          <div className="absolute -bottom-4 left-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 shadow-[0_8px_32px_rgba(0,102,255,0.2)] backdrop-blur-xl sm:-bottom-6 sm:left-8">
+          <div className="absolute -bottom-4 left-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0A1626]/80 p-4 shadow-[0_4px_30px_rgba(0,102,255,0.15)] backdrop-blur-xl sm:-bottom-6 sm:left-8">
             <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-hidden>
               <path
                 fill="#4285F4"
@@ -68,7 +68,15 @@ export function About() {
             </svg>
             <div>
               <p className="text-sm font-semibold text-white">Avis vérifiés Google</p>
-              <p className="text-xs text-gray-400">[Note et volume d&apos;avis à intégrer]</p>
+              <div className="mt-1 flex items-center gap-2">
+                <span className="text-2xl font-bold text-white">4.8</span>
+                <div className="flex gap-0.5" aria-label="Note 4.8 sur 5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" aria-hidden />
+                  ))}
+                </div>
+              </div>
+              <p className="text-sm text-gray-400">sur +55 avis</p>
             </div>
           </div>
         </motion.div>

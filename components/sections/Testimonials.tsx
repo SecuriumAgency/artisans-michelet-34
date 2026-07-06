@@ -6,6 +6,7 @@ import { TiltCard } from "@/components/ui/TiltCard";
 
 type Testimonial = {
   name: string;
+  ville: string;
   quote: string;
   rating: number;
 };
@@ -13,17 +14,23 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     name: "Baptiste B.",
-    quote: "[Avis client à intégrer]",
+    ville: "Agde (34300)",
+    quote:
+      "Intervention très rapide à Agde (34300) pour une fuite d'eau importante dans ma salle de bain. Le plombier a été professionnel, ponctuel et très clair dans ses explications. Le problème a été réglé en moins d'une heure et le tarif annoncé a été respecté. Je recommande sans hésiter !",
     rating: 5,
   },
   {
     name: "Rosie P.",
-    quote: "[Avis client à intégrer]",
+    ville: "Juvignac (34990)",
+    quote:
+      "J'ai fait appel à ce serrurier à Juvignac (34990) pour remplacer une serrure défectueuse. Le technicien a été très professionnel, de bon conseil et m'a proposé plusieurs options adaptées à mon budget. Installation rapide et matériel de qualité. Je recommande vivement.",
     rating: 5,
   },
   {
-    name: "[Nom du client]",
-    quote: "[Avis client à intégrer]",
+    name: "Romain M.",
+    ville: "Montpellier (34000)",
+    quote:
+      "Suite à une tentative d'effraction, j'ai contacté ce service de serrurerie à Juvignac (34990). Intervention le jour même pour sécuriser la porte et installer une nouvelle serrure renforcée. Travail sérieux, efficace et très bon accompagnement. Merci pour votre réactivité !",
     rating: 5,
   },
 ];
@@ -58,10 +65,11 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+              className="h-full"
             >
               <TiltCard
                 intensity={6}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors duration-300 hover:border-blue-500/50 hover:bg-white/[0.07]"
+                className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors duration-300 hover:border-blue-500/50 hover:bg-white/[0.07]"
               >
                 <div className="flex gap-1" aria-label={`Note ${testimonial.rating} sur 5`}>
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -72,12 +80,15 @@ export function Testimonials() {
                     />
                   ))}
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-gray-300">
+                <p className="mt-4 flex-grow text-sm leading-relaxed text-gray-300">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
-                <p className="mt-6 font-display text-sm font-bold text-white">
-                  {testimonial.name}
-                </p>
+                <div className="mt-6">
+                  <p className="font-display text-sm font-bold text-white">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-xs text-gray-500">{testimonial.ville}</p>
+                </div>
               </TiltCard>
             </motion.div>
           ))}
