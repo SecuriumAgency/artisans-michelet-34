@@ -28,7 +28,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
   {
     name: "Romain M.",
-    ville: "Montpellier (34000)",
+    ville: "Juvignac (34990)",
     quote:
       "Suite à une tentative d'effraction, j'ai contacté ce service de serrurerie à Juvignac (34990). Intervention le jour même pour sécuriser la porte et installer une nouvelle serrure renforcée. Travail sérieux, efficace et très bon accompagnement. Merci pour votre réactivité !",
     rating: 5,
