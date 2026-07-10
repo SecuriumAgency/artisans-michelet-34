@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { MeshTransmissionMaterial } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -66,6 +66,11 @@ function generateWaterNormalMap(size = 128): THREE.CanvasTexture {
 /** Outer glass/metal shell (transmission) + inner flowing-water core. */
 function GlassPipe() {
   const groupRef = useRef<THREE.Group>(null);
+  const dpr = useThree((state) => state.viewport.dpr);
+  // MeshTransmissionMaterial renders an off-screen FBO pass every frame — the single
+  // most expensive part of this scene. Scale its resolution down on high-DPR screens
+  // (Retina/4K) to keep that pass cheap without touching the on-screen dpr cap.
+  const transmissionResolution = dpr > 2 ? 256 : dpr > 1 ? 384 : 512;
 
   const curve = useMemo(
     () => new THREE.CatmullRomCurve3(PIPE_POINTS.map(([x, y, z]) => new THREE.Vector3(x, y, z))),
@@ -106,7 +111,7 @@ function GlassPipe() {
           chromaticAberration={0.05}
           roughness={0.05}
           background={new THREE.Color("#020617")}
-          resolution={512}
+          resolution={transmissionResolution}
           samples={2}
           anisotropicBlur={0.1}
         />
