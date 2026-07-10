@@ -1,152 +1,148 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const vertexShader = `
-  uniform float uTime;
-  uniform vec2 uMouse;
+type TubeConfig = {
+  points: [number, number, number][];
+  radius: number;
+  color: string;
+  bobSpeed: number;
+  bobAmount: number;
+  phase: number;
+};
 
-  varying vec3 vNormal;
-  varying vec3 vViewPosition;
-  varying float vElevation;
+const TUBES: TubeConfig[] = [
+  {
+    points: [
+      [-6, -2.5, -3],
+      [-3, 1.5, -1],
+      [0, -1.5, 0],
+      [3, 2, 1.5],
+      [6.5, -1, 0],
+    ],
+    radius: 0.32,
+    color: "#0AA8C2",
+    bobSpeed: 0.14,
+    bobAmount: 0.18,
+    phase: 0,
+  },
+  {
+    points: [
+      [6, 3.5, -4],
+      [2.5, 0.5, -1.5],
+      [-1, 2.5, 0],
+      [-4.5, -1, 1.5],
+      [-7, 2.5, -1],
+    ],
+    radius: 0.24,
+    color: "#C08A52",
+    bobSpeed: 0.11,
+    bobAmount: 0.22,
+    phase: 2.1,
+  },
+  {
+    points: [
+      [-4, -4.5, 1],
+      [-1, -2, -1.5],
+      [2.5, -3.5, 0.5],
+      [6, -1.5, 2],
+    ],
+    radius: 0.2,
+    color: "#0AA8C2",
+    bobSpeed: 0.17,
+    bobAmount: 0.15,
+    phase: 4.3,
+  },
+];
 
-  float wave(vec2 p, float t) {
-    float e = 0.0;
-    e += sin(p.x * 2.2 + t * 0.25) * 0.16;
-    e += sin(p.y * 2.9 - t * 0.18) * 0.13;
-    e += sin((p.x + p.y) * 1.6 + t * 0.12) * 0.11;
-    e += sin((p.x - p.y) * 3.4 + t * 0.3) * 0.07;
-    e += sin(p.x * 5.1 - t * 0.4) * 0.05;
-    e += sin(p.y * 4.3 + t * 0.35) * 0.04;
-
-    float mouseDist = distance(p, uMouse);
-    e += exp(-mouseDist * mouseDist * 0.35) * 0.9;
-
-    return e;
-  }
-
-  void main() {
-    vec3 pos = position;
-    float eps = 0.06;
-
-    float e = wave(pos.xy, uTime);
-    float eX = wave(pos.xy + vec2(eps, 0.0), uTime);
-    float eY = wave(pos.xy + vec2(0.0, eps), uTime);
-
-    pos.z += e;
-
-    vec3 tangentX = normalize(vec3(eps, 0.0, eX - e));
-    vec3 tangentY = normalize(vec3(0.0, eps, eY - e));
-    vec3 objectNormal = normalize(cross(tangentX, tangentY));
-
-    vElevation = e;
-    vNormal = normalize(normalMatrix * objectNormal);
-
-    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-    vViewPosition = -mvPosition.xyz;
-    gl_Position = projectionMatrix * mvPosition;
-  }
-`;
-
-const fragmentShader = `
-  uniform vec3 uBase;
-  uniform vec3 uAccentA;
-  uniform vec3 uAccentB;
-  uniform float uTime;
-
-  varying vec3 vNormal;
-  varying vec3 vViewPosition;
-  varying float vElevation;
-
-  void main() {
-    vec3 normal = normalize(vNormal);
-    vec3 viewDir = normalize(vViewPosition);
-
-    float fresnel = pow(1.0 - clamp(dot(normal, viewDir), 0.0, 1.0), 1.4);
-
-    vec3 lightDir = normalize(vec3(0.4, 0.6, 1.0));
-    float diffuse = max(dot(normal, lightDir), 0.0);
-    float specular = pow(max(dot(reflect(-lightDir, normal), viewDir), 0.0), 48.0);
-
-    float mixFactor = smoothstep(-1.0, 1.0, sin(uTime * 0.07 + vElevation * 3.0));
-    vec3 accent = mix(uAccentA, uAccentB, mixFactor);
-
-    vec3 color = uBase;
-    color += accent * 0.09;
-    color += accent * fresnel * 1.6;
-    color += accent * diffuse * 0.3;
-    color += vec3(0.95, 1.0, 1.0) * specular * 0.9;
-
-    gl_FragColor = vec4(color, 1.0);
-  }
-`;
-
-class LiquidMetalMaterial extends THREE.ShaderMaterial {
-  constructor() {
-    super({
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector2(0, 0) },
-        uBase: { value: new THREE.Color("#020617") },
-        uAccentA: { value: new THREE.Color("#0AA8C2") },
-        uAccentB: { value: new THREE.Color("#C08A52") },
-      },
-      vertexShader,
-      fragmentShader,
-    });
-  }
-}
-
-function LiquidPlane() {
+function Tube({ points, radius, color, bobSpeed, bobAmount, phase }: TubeConfig) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const material = useMemo(() => new LiquidMetalMaterial(), []);
-  const mouseTarget = useRef(new THREE.Vector2());
-  const mouseSmoothed = useRef(new THREE.Vector2());
-  const { viewport } = useThree();
+  const baseY = useRef(0);
 
-  useFrame((state, delta) => {
-    material.uniforms.uTime.value += delta;
-
-    mouseTarget.current.set(
-      state.pointer.x * viewport.width * 0.5,
-      state.pointer.y * viewport.height * 0.5
+  const geometry = useMemo(() => {
+    const curve = new THREE.CatmullRomCurve3(
+      points.map(([x, y, z]) => new THREE.Vector3(x, y, z))
     );
-    mouseSmoothed.current.lerp(mouseTarget.current, Math.min(1, delta * 2.5));
-    material.uniforms.uMouse.value.copy(mouseSmoothed.current);
+    return new THREE.TubeGeometry(curve, 64, radius, 12, false);
+  }, [points, radius]);
 
+  useFrame((state) => {
     const mesh = meshRef.current;
     if (!mesh) return;
-    mesh.rotation.y = THREE.MathUtils.lerp(
-      mesh.rotation.y,
-      state.pointer.x * 0.06,
-      delta * 3
-    );
-    mesh.rotation.x = THREE.MathUtils.lerp(
-      mesh.rotation.x,
-      -state.pointer.y * 0.04,
-      delta * 3
-    );
+    const t = state.clock.getElapsedTime();
+    mesh.position.y = baseY.current + Math.sin(t * bobSpeed + phase) * bobAmount;
+    mesh.rotation.z = Math.sin(t * bobSpeed * 0.6 + phase) * 0.05;
   });
 
   return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[viewport.width * 1.3, viewport.height * 1.3, 80, 48]} />
-      <primitive object={material} attach="material" />
+    <mesh ref={meshRef} geometry={geometry}>
+      <meshPhysicalMaterial
+        color={color}
+        metalness={0.9}
+        roughness={0.1}
+        clearcoat={1}
+        clearcoatRoughness={0.15}
+        reflectivity={0.6}
+      />
     </mesh>
   );
 }
 
+function TubeField() {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((_, delta) => {
+    const group = groupRef.current;
+    if (!group) return;
+    group.rotation.y += delta * 0.015;
+  });
+
+  return (
+    <group ref={groupRef}>
+      {TUBES.map((tube, i) => (
+        <Tube key={i} {...tube} />
+      ))}
+    </group>
+  );
+}
+
+function Lighting() {
+  return (
+    <>
+      <ambientLight intensity={0.18} />
+      <directionalLight position={[6, 4, 5]} intensity={1.4} color="#0AA8C2" />
+      <directionalLight position={[-6, -3, 4]} intensity={1.1} color="#C08A52" />
+      <pointLight position={[0, 0, 8]} intensity={0.4} color="#ffffff" />
+    </>
+  );
+}
+
+function useIsPageVisible() {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const handler = () => setVisible(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", handler);
+    return () => document.removeEventListener("visibilitychange", handler);
+  }, []);
+  return visible;
+}
+
 export function BackgroundCanvas() {
+  const isPageVisible = useIsPageVisible();
+
   return (
     <Canvas
       dpr={[1, 1.5]}
       gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
-      camera={{ position: [0, 0, 6], fov: 45 }}
+      camera={{ position: [0, 0, 9], fov: 50 }}
+      frameloop={isPageVisible ? "always" : "never"}
     >
       <color attach="background" args={["#020617"]} />
-      <LiquidPlane />
+      <fog attach="fog" args={["#020617", 8, 18]} />
+      <Lighting />
+      <TubeField />
     </Canvas>
   );
 }

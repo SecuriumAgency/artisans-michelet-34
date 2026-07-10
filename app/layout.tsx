@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { BackgroundCanvasLoader } from "@/components/three/BackgroundCanvasLoader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,7 +40,7 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${playfairDisplay.variable} h-full antialiased`}
     >
-      <body className="min-h-full w-full flex flex-col overflow-x-hidden bg-michelet-dark text-white">
+      <body className="min-h-full w-full flex flex-col overflow-x-hidden bg-transparent text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -81,6 +82,7 @@ export default function RootLayout({
         />
         <SmoothScroll />
         <Header />
+        <BackgroundCanvasLoader />
         <PageTransition>{children}</PageTransition>
         <Footer />
         <Analytics />
