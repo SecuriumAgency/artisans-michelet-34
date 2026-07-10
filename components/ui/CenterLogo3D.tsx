@@ -61,7 +61,8 @@ export function CenterLogo3D() {
           alt="Artisans Michelet"
           width={LOGO_WIDTH}
           height={LOGO_HEIGHT}
-          preload
+          fetchPriority="high"
+          loading="eager"
           sizes="(min-width: 1024px) 20rem, (min-width: 768px) 18rem, 14rem"
           className="h-auto w-full object-contain"
         />
