@@ -6,9 +6,9 @@ type Variant = "primary" | "outline";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary:
-    "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-blue-400/20 hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]",
+    "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] border border-cyan-400/30 backdrop-blur-md hover:shadow-[0_0_40px_rgba(6,182,212,0.55)] hover:border-cyan-300/50",
   outline:
-    "bg-transparent border border-white/30 text-white hover:bg-white/5 backdrop-blur-sm",
+    "bg-white/5 border border-white/20 text-white backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.35)] hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_25px_rgba(192,138,82,0.35)]",
 };
 
 const BASE_CLASSES =
