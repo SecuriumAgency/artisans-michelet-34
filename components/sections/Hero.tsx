@@ -16,9 +16,9 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-10 text-center">
         <CenterLogo3D />
 
-        <p className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
+        <h1 className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
           Plomberie et serrurerie d&apos;exception dans tout le département de l&apos;Hérault.
-        </p>
+        </h1>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/contact" variant="primary">
