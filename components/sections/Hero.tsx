@@ -1,22 +1,26 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CenterLogo3D } from "@/components/ui/CenterLogo3D";
 import { TrustBar } from "@/components/ui/TrustBar";
 
-const HERO_IMAGE_URL =
-  "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2070";
+const HeroCanvas = dynamic(
+  () => import("@/components/three/HeroCanvas").then((mod) => mod.HeroCanvas),
+  { ssr: false }
+);
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.15]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   return (
     <section
@@ -24,16 +28,14 @@ export function Hero() {
       aria-label="Artisans Michelet — Plomberie et Serrurerie dans l'Hérault"
       className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-michelet-dark px-6 py-28"
     >
-      <motion.div style={{ y }} className="absolute inset-0 -top-1/3 h-[170%]">
-        <Image
-          src={HERO_IMAGE_URL}
-          alt="Réalisation artisanale Michelet"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover"
-        />
-      </motion.div>
+      {!prefersReducedMotion && (
+        <motion.div
+          style={{ opacity, scale }}
+          className="absolute inset-0 h-full w-full"
+        >
+          <HeroCanvas />
+        </motion.div>
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-michelet-dark/80 via-michelet-dark/60 to-michelet-dark/95" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.4)_0%,rgba(5,11,20,0.95)_100%)]" />
 
