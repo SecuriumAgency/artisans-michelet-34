@@ -23,8 +23,8 @@ function Lighting({ premium }: { premium: boolean }) {
   return (
     <>
       <ambientLight intensity={0.08} />
-      <spotLight position={[6, 5, 6]} angle={0.5} penumbra={0.6} intensity={4} color="#0AA8C2" />
-      <spotLight position={[-6, -3, 5]} angle={0.5} penumbra={0.6} intensity={3} color="#C08A52" />
+      <spotLight position={[6, 5, 6]} angle={0.35} penumbra={0.4} intensity={5} color="#ffffff" />
+      <spotLight position={[-6, -3, 5]} angle={0.35} penumbra={0.4} intensity={4} color="#00E5FF" />
       <pointLight position={[0, 0, 6]} intensity={0.3} color="#ffffff" />
     </>
   );
