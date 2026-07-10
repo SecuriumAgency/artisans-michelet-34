@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, MeshTransmissionMaterial } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 
@@ -81,6 +81,11 @@ function generateWaterNormalMap(size = 128): THREE.CanvasTexture {
 function CopperPipe() {
   const groupRef = useRef<THREE.Group>(null);
   const curve = useResponsiveCurve();
+  const dpr = useThree((state) => state.viewport.dpr);
+  // MeshTransmissionMaterial renders an off-screen FBO pass every frame — the single
+  // most expensive part of this scene. Scale its resolution down on high-DPR screens
+  // (Retina/4K) to keep that pass cheap without touching the on-screen dpr cap.
+  const transmissionResolution = dpr > 2 ? 256 : dpr > 1 ? 384 : 512;
 
   const outerGeometry = useMemo(
     () => new THREE.TubeGeometry(curve, 140, OUTER_RADIUS, 24, false),
@@ -93,7 +98,7 @@ function CopperPipe() {
   const waterNormalMap = useMemo(() => generateWaterNormalMap(), []);
 
   useFrame((state, delta) => {
-    waterNormalMap.offset.x -= delta * 0.4;
+    waterNormalMap.offset.x -= delta * 2.0;
 
     const group = groupRef.current;
     if (!group) return;
@@ -102,28 +107,38 @@ function CopperPipe() {
 
   return (
     <group ref={groupRef}>
-      <mesh geometry={innerGeometry}>
+      <mesh geometry={innerGeometry} renderOrder={0}>
         <meshPhysicalMaterial
           color="#00E5FF"
-          transmission={0.9}
-          roughness={0.3}
+          transmission={0.4}
+          transparent
+          opacity={0.95}
+          roughness={0.1}
           ior={1.33}
+          depthWrite={false}
+          fog={false}
           normalMap={waterNormalMap}
           normalScale={new THREE.Vector2(0.7, 0.7)}
           emissive="#00E5FF"
-          emissiveIntensity={0.12}
+          emissiveIntensity={0.6}
         />
       </mesh>
-      <mesh geometry={outerGeometry}>
-        <meshPhysicalMaterial
+      {/* No `background` prop: MeshTransmissionMaterial then captures the live scene
+          behind it (including the water mesh above) instead of a flat static color. */}
+      <mesh geometry={outerGeometry} renderOrder={1}>
+        <MeshTransmissionMaterial
           color="#b87333"
           transmission={1}
+          transparent
+          opacity={1}
           metalness={0.6}
-          roughness={0.1}
+          roughness={0.05}
           ior={1.5}
           thickness={2}
           clearcoat={1}
-          clearcoatRoughness={0.1}
+          fog={false}
+          resolution={transmissionResolution}
+          samples={2}
         />
       </mesh>
     </group>
