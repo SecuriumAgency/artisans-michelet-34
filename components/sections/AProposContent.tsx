@@ -18,7 +18,7 @@ export function AProposContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+        <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
           À propos
         </span>
         <h1 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">

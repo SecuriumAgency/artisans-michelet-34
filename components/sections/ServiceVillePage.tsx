@@ -79,7 +79,7 @@ function VilleHero({
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 text-center">
         <CenterLogo3D />
 
-        <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+        <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
           {service} — Hérault (34)
         </span>
 
@@ -237,7 +237,7 @@ function Sidebar({
 
         {siblingVilles.length > 0 && (
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gray-400">
               <MapPin className="h-3.5 w-3.5" aria-hidden />
               Nous intervenons à
             </p>

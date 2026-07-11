@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <main className="flex-1 bg-michelet-dark px-6 py-32">
       <div className="mx-auto max-w-2xl">
-        <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+        <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
           Contact
         </span>
         <ContactForm as="h1" className="mt-3" />

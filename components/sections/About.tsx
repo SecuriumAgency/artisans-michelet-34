@@ -87,7 +87,7 @@ export function About() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+          <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
             À propos
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">

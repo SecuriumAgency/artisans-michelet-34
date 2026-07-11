@@ -32,7 +32,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
               Plombier Hérault (34)
             </p>
             <ul className="mt-5 space-y-3">
@@ -47,7 +47,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
               Serrurier Hérault (34)
             </p>
             <ul className="mt-5 space-y-3">
@@ -62,7 +62,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
               Navigation
             </p>
             <ul className="mt-5 space-y-3">
@@ -77,21 +77,21 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-white/5 pt-8 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/5 pt-8 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Artisans Michelet. Tous droits réservés.</p>
           <p>SIRET [à compléter] — Assurance décennale [à compléter]</p>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500">
+        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-400">
           <Link
             href="/mentions-legales"
-            className="text-xs text-gray-500 transition-colors duration-300 hover:text-blue-400"
+            className="text-xs text-gray-400 transition-colors duration-300 hover:text-blue-400"
           >
             Mentions légales
           </Link>
           <Link
             href="/politique-confidentialite"
-            className="text-xs text-gray-500 transition-colors duration-300 hover:text-blue-400"
+            className="text-xs text-gray-400 transition-colors duration-300 hover:text-blue-400"
           >
             Politique de confidentialité
           </Link>

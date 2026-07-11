@@ -49,7 +49,7 @@ export function Testimonials() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+          <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
             Témoignages
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
@@ -87,7 +87,7 @@ export function Testimonials() {
                   <p className="font-display text-sm font-bold text-white">
                     {testimonial.name}
                   </p>
-                  <p className="text-xs text-gray-500">{testimonial.ville}</p>
+                  <p className="text-xs text-gray-400">{testimonial.ville}</p>
                 </div>
               </TiltCard>
             </motion.div>

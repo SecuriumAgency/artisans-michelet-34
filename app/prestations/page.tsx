@@ -11,7 +11,7 @@ export default function PrestationsPage() {
   return (
     <main className="flex-1 bg-michelet-dark pt-20">
       <div className="mx-auto max-w-6xl px-6 pt-16 text-center">
-        <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+        <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
           Prestations
         </span>
         <h1 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">

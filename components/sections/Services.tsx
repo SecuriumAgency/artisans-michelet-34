@@ -42,7 +42,7 @@ export function Services() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-michelet-blue">
+          <span className="text-sm font-semibold uppercase tracking-widest text-blue-500">
             Nos prestations
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
