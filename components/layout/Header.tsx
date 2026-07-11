@@ -63,7 +63,7 @@ export function Header() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-michelet-blue/50 md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-michelet-blue/50 md:hidden"
         >
           {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
         </button>
@@ -82,7 +82,7 @@ export function Header() {
 
         <Link
           href="tel:0411939674"
-          className="flex items-center gap-2 rounded-full border border-michelet-blue/50 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-michelet-blue hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
+          className="flex min-h-[44px] items-center gap-2 rounded-full border border-michelet-blue/50 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-michelet-blue hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
         >
           <Phone className="h-4 w-4" />
           04 11 93 96 74

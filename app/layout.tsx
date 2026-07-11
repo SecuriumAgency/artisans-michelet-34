@@ -21,13 +21,62 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
 });
 
-const TITLE = "Artisans Michelet | Artisanat d'exception dans l'Hérault";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+const TITLE = "Artisans Michelet | Plombier & Serrurier dans l'Hérault (34)";
 const DESCRIPTION =
-  "Artisans Michelet, savoir-faire artisanal haut de gamme dans le département 34 (Hérault). Service d'urgence disponible 24h/24, 7j/7.";
+  "Artisans Michelet : plombier et serrurier qualifiés dans l'Hérault (34). Dépannage, installation, ouverture de porte. Intervention rapide 24h/24 et 7j/7, devis transparent, garantie décennale.";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s | Artisans Michelet",
+  },
   description: DESCRIPTION,
+  keywords: [
+    "plombier Hérault",
+    "serrurier Hérault",
+    "plombier Montpellier",
+    "serrurier Montpellier",
+    "dépannage plomberie 34",
+    "artisan serrurier urgence",
+  ],
+  authors: [{ name: "Artisans Michelet" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: SITE_URL,
+    siteName: "Artisans Michelet",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Artisans Michelet — Plombier & Serrurier dans l'Hérault",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
 };
 
 export default function RootLayout({

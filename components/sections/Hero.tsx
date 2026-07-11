@@ -14,11 +14,13 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,11,20,0.15)_0%,rgba(5,11,20,0.85)_100%)]" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-10 text-center">
+        <h1 className="sr-only">Artisans Michelet</h1>
+
         <CenterLogo3D />
 
-        <h1 className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
+        <p className="max-w-2xl text-center font-sans text-sm font-light leading-relaxed tracking-wide text-gray-300 md:text-base">
           Plomberie et serrurerie d&apos;exception dans tout le département de l&apos;Hérault.
-        </h1>
+        </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/contact" variant="primary">

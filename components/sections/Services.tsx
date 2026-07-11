@@ -68,7 +68,7 @@ export function Services() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-michelet-blue/10 text-michelet-blue">
                     <Icon className="h-6 w-6" aria-hidden />
                   </div>
-                  <h3 className="mt-6 font-display text-xl font-bold text-white">{title}</h3>
+                  <h2 className="mt-6 font-display text-xl font-bold text-white">{title}</h2>
                   <p className="mt-3 text-sm leading-relaxed text-gray-400">{description}</p>
                 </div>
               </TiltCard>

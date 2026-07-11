@@ -12,7 +12,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
 };
 
 const BASE_CLASSES =
-  "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95";
+  "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95";
 
 type ButtonProps = {
   variant?: Variant;
