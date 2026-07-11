@@ -149,10 +149,16 @@ function CopperPipe() {
 export default function GlassPipeScene() {
   return (
     <>
-      <Environment preset="warehouse" background={false} environmentIntensity={0.5} />
+      {/* resolution halved from drei's 256 default: the PMREM cube render target is
+          rebuilt on mount, and this HDRI only ever lights blurred metal/glass
+          reflections, so the extra texel density isn't visible here. */}
+      <Environment preset="warehouse" background={false} environmentIntensity={0.5} resolution={128} />
       <CopperPipe />
       <EffectComposer multisampling={0}>
-        <Bloom luminanceThreshold={0.8} luminanceSmoothing={0.4} intensity={1.2} mipmapBlur />
+        {/* mipmapBlur stays on — it's the modern, cheaper blur path (the deprecated
+            KawaseBlurPass kernel is worse). `levels` trims the mip chain from the
+            library's default of 8 down to 5 passes, the actual cost lever. */}
+        <Bloom luminanceThreshold={0.8} luminanceSmoothing={0.4} intensity={1.2} mipmapBlur levels={5} />
         <Vignette eskil={false} offset={0.25} darkness={0.65} />
       </EffectComposer>
     </>
