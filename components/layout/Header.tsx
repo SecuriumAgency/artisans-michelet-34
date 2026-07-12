@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { cn } from "@/lib/cn";
+
+function handleCallClick() {
+  // TODO: Injecter le label de conversion Google Ads (ex: sendGAEvent({ event: 'conversion', send_to: 'AW-1849890923/LABEL_A_DEFINIR' }))
+}
 
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
@@ -82,6 +87,7 @@ export function Header() {
 
         <Link
           href="tel:0411939674"
+          onClick={handleCallClick}
           className="flex min-h-[44px] items-center gap-2 rounded-full border border-michelet-blue/50 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-michelet-blue hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
         >
           <Phone className="h-4 w-4" />

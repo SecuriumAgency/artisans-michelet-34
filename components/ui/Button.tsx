@@ -17,11 +17,13 @@ const BASE_CLASSES =
 type ButtonProps = {
   variant?: Variant;
   href?: string;
-} & ComponentPropsWithoutRef<"button">;
+  onClick?: () => void;
+} & Omit<ComponentPropsWithoutRef<"button">, "onClick">;
 
 export function Button({
   variant = "primary",
   href,
+  onClick,
   className = "",
   children,
   ...props
@@ -30,14 +32,14 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={onClick}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} onClick={onClick} {...props}>
       {children}
     </button>
   );

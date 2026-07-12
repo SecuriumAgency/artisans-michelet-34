@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Header } from "@/components/layout/Header";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Footer } from "@/components/layout/Footer";
@@ -136,6 +137,7 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics gaId="AW-1849890923" />
       </body>
     </html>
   );

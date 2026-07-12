@@ -1,6 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { Phone } from "lucide-react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { VILLES_PLOMBERIE, VILLES_SERRURERIE } from "@/lib/villes";
+
+function handleCallClick() {
+  // TODO: Injecter le label de conversion Google Ads (ex: sendGAEvent({ event: 'conversion', send_to: 'AW-1849890923/LABEL_A_DEFINIR' }))
+}
 
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
@@ -24,6 +31,7 @@ export function Footer() {
             </p>
             <Link
               href="tel:0411939674"
+              onClick={handleCallClick}
               className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-blue-400"
             >
               <Phone className="h-4 w-4" aria-hidden />

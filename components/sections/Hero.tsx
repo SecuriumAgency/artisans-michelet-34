@@ -1,8 +1,13 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import { Button } from "@/components/ui/Button";
 import { CenterLogo3D } from "@/components/ui/CenterLogo3D";
 import { TrustBar } from "@/components/ui/TrustBar";
+
+function handleCallClick() {
+  // TODO: Injecter le label de conversion Google Ads (ex: sendGAEvent({ event: 'conversion', send_to: 'AW-1849890923/LABEL_A_DEFINIR' }))
+}
 
 export function Hero() {
   return (
@@ -26,7 +31,7 @@ export function Hero() {
           <Button href="/contact" variant="primary">
             Demander un devis
           </Button>
-          <Button href="tel:0411939674" variant="outline">
+          <Button href="tel:0411939674" variant="outline" onClick={handleCallClick}>
             Appeler l&apos;expert 04 11 93 96 74
           </Button>
         </div>
