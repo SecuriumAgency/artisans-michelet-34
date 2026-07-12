@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/sections/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact | Artisans Michelet",
+  title: "Contact",
   description:
     "Contactez Artisans Michelet pour un devis plomberie ou serrurerie dans l'Hérault (34). Réponse sous 24h.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

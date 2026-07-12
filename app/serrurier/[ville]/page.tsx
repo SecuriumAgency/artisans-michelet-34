@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ville = findVille(VILLES_SERRURERIE, slug)!;
 
   return {
-    title: `Serrurier d'Urgence à ${ville.nom} (${ville.codePostal}) | Artisans Michelet`,
+    title: `Serrurier d'Urgence à ${ville.nom} (${ville.codePostal})`,
     description: `Serrurier d'urgence à ${ville.nom} (${ville.codePostal}) : ouverture de porte, blindage, changement de serrure, rideaux métalliques. Intervention rapide 24h/24, 7j/7. Devis transparent.`,
+    alternates: { canonical: `/serrurier/${slug}` },
   };
 }
 

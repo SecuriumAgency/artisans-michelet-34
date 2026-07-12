@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité | Artisans Michelet",
+  title: "Politique de confidentialité",
   description:
     "Politique de confidentialité du site Artisans Michelet : données collectées, finalité, durée de conservation et droits des utilisateurs (RGPD).",
+  alternates: { canonical: "/politique-confidentialite" },
 };
 
 export default function PolitiqueConfidentialitePage() {

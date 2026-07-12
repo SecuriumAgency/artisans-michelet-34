@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales | Artisans Michelet",
+  title: "Mentions légales",
   description:
     "Mentions légales du site Artisans Michelet : éditeur, hébergeur et propriété intellectuelle.",
+  alternates: { canonical: "/mentions-legales" },
 };
 
 export default function MentionsLegalesPage() {

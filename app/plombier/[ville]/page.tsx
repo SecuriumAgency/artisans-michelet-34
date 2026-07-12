@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ville = findVille(VILLES_PLOMBERIE, slug)!;
 
   return {
-    title: `Plombier d'Urgence à ${ville.nom} (${ville.codePostal}) | Artisans Michelet`,
+    title: `Plombier d'Urgence à ${ville.nom} (${ville.codePostal})`,
     description: `Plombier d'urgence à ${ville.nom} (${ville.codePostal}) : recherche de fuite, débouchage, chauffe-eau, installation. Intervention rapide 24h/24, 7j/7. Devis transparent, garantie décennale.`,
+    alternates: { canonical: `/plombier/${slug}` },
   };
 }
 

@@ -25,6 +25,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${BASE_URL}/mentions-legales`,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${BASE_URL}/politique-confidentialite`,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
   ];
 
   const plombierRoutes: MetadataRoute.Sitemap = plomberieCities.map((slug) => ({

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Services } from "@/components/sections/Services";
 
 export const metadata: Metadata = {
-  title: "Prestations | Artisans Michelet",
+  title: "Prestations",
   description:
     "Plomberie, serrurerie et interventions sur-mesure dans l'Hérault (34), par les Artisans Michelet.",
+  alternates: { canonical: "/prestations" },
 };
 
 export default function PrestationsPage() {
