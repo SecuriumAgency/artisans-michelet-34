@@ -68,6 +68,16 @@ const nextConfig: NextConfig = {
         destination: "/prestations",
         permanent: true,
       },
+      {
+        source: "/:path*.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:path*.html",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };

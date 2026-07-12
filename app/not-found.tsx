@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallButton } from "@/components/ui/PhoneCallButton";
 
 export const metadata: Metadata = {
   title: "Page introuvable",
@@ -25,13 +26,14 @@ export default function NotFound() {
         <Button href="/" variant="primary">
           Retour à l&apos;accueil
         </Button>
-        <Link
-          href="/contact"
-          className="text-sm font-medium text-white/70 underline-offset-4 transition-colors hover:text-michelet-blue hover:underline"
-        >
-          Contactez-nous
-        </Link>
+        <PhoneCallButton phone="0411939674" label="Appeler l'expert 04 11 93 96 74" variant="outline" />
       </div>
+      <Link
+        href="/contact"
+        className="mt-6 text-sm font-medium text-white/70 underline-offset-4 transition-colors hover:text-michelet-blue hover:underline"
+      >
+        Contactez-nous
+      </Link>
     </main>
   );
 }
