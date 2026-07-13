@@ -99,14 +99,6 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               name: "Artisans Michelet",
               description: DESCRIPTION,
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "1 Rue de la République",
-                addressLocality: "Montpellier",
-                postalCode: "34000",
-                addressRegion: "Occitanie",
-                addressCountry: "FR",
-              },
               telephone: "04 11 93 96 74",
               areaServed: {
                 "@type": "AdministrativeArea",
