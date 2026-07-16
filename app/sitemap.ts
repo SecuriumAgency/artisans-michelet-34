@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { plomberieCities, serrurerieCities } from "@/lib/data/seo-cities";
+import conseilsArticlesData from "@/app/conseils/articles.json";
+import type { ConseilArticle } from "@/app/conseils/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const conseilsArticles = conseilsArticlesData as ConseilArticle[];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -35,7 +38,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.2,
     },
+    {
+      url: `${BASE_URL}/conseils`,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
   ];
+
+  const conseilsRoutes: MetadataRoute.Sitemap = conseilsArticles.map((article) => {
+    const parsedDate = article.date ? new Date(article.date) : undefined;
+    const lastModified = parsedDate && !Number.isNaN(parsedDate.getTime()) ? parsedDate : undefined;
+    return {
+      url: `${BASE_URL}/conseils/${article.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      ...(lastModified ? { lastModified } : {}),
+    };
+  });
 
   const plombierRoutes: MetadataRoute.Sitemap = plomberieCities.map((slug) => ({
     url: `${BASE_URL}/plombier/${slug}`,
@@ -49,5 +68,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...plombierRoutes, ...serrurierRoutes];
+  return [...staticRoutes, ...conseilsRoutes, ...plombierRoutes, ...serrurierRoutes];
 }
