@@ -1,0 +1,54 @@
+name: AEO Autopilot
+
+on:
+  schedule:
+    - cron: "0 10 * * 2,4"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  aeo-autopilot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cycle de vie AEO (purge des articles > 180 jours)
+        run: node scripts/aeo-lifecycle.mjs
+
+      - name: Génération IA d'un nouvel article SEO
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/aeo-generator.mjs
+        continue-on-error: true
+
+      - name: Génération des pages Next.js statiques
+        run: |
+          if [ -n "$(find content/conseils -maxdepth 1 -name '*.md' 2>/dev/null)" ]; then
+            npm run generate:aeo -- --dir content/conseils
+          else
+            echo "Aucun brouillon Markdown, étape ignorée."
+          fi
+
+      - name: Commit et push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/conseils app/conseils
+          if git diff --cached --quiet; then
+            echo "Aucun changement à committer."
+          else
+            git commit -m "chore(aeo): cycle de vie et nouvel article SEO"
+            git push
+          fi
